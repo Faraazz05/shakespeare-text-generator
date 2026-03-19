@@ -1,0 +1,52 @@
+version: "3.9"
+
+# ══════════════════════════════════════════════════════════════
+#  Hybrid Text Generation System — Docker Compose
+# ══════════════════════════════════════════════════════════════
+
+services:
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: ../docker/Dockerfile.backend
+    container_name: htg-backend
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./checkpoints:/app/checkpoints    # model weights persist
+      - ./data:/app/data                  # corpus cache persists
+      - ./logs:/app/logs
+      - ./backend:/app                    # hot-reload in dev (remove for prod)
+    environment:
+      - PYTHONPATH=/app
+      - ENVIRONMENT=development
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 30s
+
+  # frontend:                             # uncomment after React build
+  #   build:
+  #     context: ./frontend
+  #     dockerfile: ../docker/Dockerfile.frontend
+  #   container_name: htg-frontend
+  #   ports:
+  #     - "3000:3000"
+  #   depends_on:
+  #     - backend
+  #   environment:
+  #     - VITE_API_BASE_URL=http://localhost:8000
+  #   restart: unless-stopped
+
+volumes:
+  checkpoints:
+  data:
+  logs:
+
+networks:
+  default:
+    name: htg-network

@@ -1,0 +1,58 @@
+[project]
+name        = "Hybrid Text Generation System"
+version     = "1.0.0"
+description = "RNN + Transformer text generation with XAI"
+
+[model]
+default        = "rnn"
+checkpoint_dir = "./checkpoints"
+device         = "auto"
+
+[model.rnn]
+type          = "lstm"
+embedding_dim = 128
+hidden_size   = 256
+num_layers    = 2
+dropout       = 0.3
+vocab_size    = 0
+
+[model.transformer]
+model_name     = "distilgpt2"
+max_new_tokens = 100
+cache_dir      = "./checkpoints/hf_cache"
+
+[training]
+dataset         = "tinyshakespeare"
+data_dir        = "./data"
+sequence_length = 100
+batch_size      = 64
+epochs          = 20
+learning_rate   = 0.001
+grad_clip       = 5.0
+val_split       = 0.1
+save_every      = 5
+log_every       = 100
+
+[generation]
+temperature = 0.8
+top_k       = 40
+max_length  = 200
+seed_text   = "To be or not to be"
+
+[xai]
+method       = "integrated_gradients"
+n_steps      = 50
+top_k_tokens = 10
+
+[api]
+host         = "0.0.0.0"
+port         = 8000
+reload       = true
+# ✅ Added port 8080 (Vite default) so frontend can reach the backend
+cors_origins = [
+  "http://localhost:3000",
+  "http://localhost:5173",
+  "http://localhost:8080",
+  "http://127.0.0.1:8080",
+  "http://127.0.0.1:5173"
+]
