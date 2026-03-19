@@ -10,7 +10,7 @@ import ConfigPage from "@/pages/ConfigPage";
 import NotFound from "@/pages/NotFound";
 
 // ✅ Must match REPO_NAME in vite.config.ts
-const BASE = import.meta.env.MODE === "production" ? "/hybrid-text-gen" : "";
+const BASE = import.meta.env.MODE === "production" ? "/shakespeare-text-generator" : "";
 
 function App() {
   return (
