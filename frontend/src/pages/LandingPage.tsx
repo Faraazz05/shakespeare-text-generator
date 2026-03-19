@@ -230,7 +230,7 @@ export default function LandingPage() {
             >
               Launch the App
               <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-            </button>cd 
+            </button>
             <p className="mt-3 text-xs text-slate-600">Backend must be running on localhost:8000</p>
           </div>
         </div>
