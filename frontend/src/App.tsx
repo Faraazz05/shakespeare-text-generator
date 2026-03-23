@@ -10,6 +10,7 @@ import ModelsPage from "@/pages/ModelsPage";
 import TrainPage from "@/pages/TrainPage";
 import ConfigPage from "@/pages/ConfigPage";
 import NotFound from "@/pages/NotFound";
+import LandingPage from "./pages/LandingPage";
 
 function App() {
   return (
@@ -18,7 +19,8 @@ function App() {
       <BrowserRouter>
         <Navbar />
         <Routes>
-          <Route path="/"         element={<Index />} />
+          <Route path="/"         element={<LandingPage />} />
+          <Route path="/index"    element={<Index />} />
           <Route path="/generate" element={<GeneratePage />} />
           <Route path="/explain"  element={<ExplainPage />} />
           <Route path="/models"   element={<ModelsPage />} />
