@@ -8,6 +8,7 @@ import GenerationHistory from '@/components/GenerationHistory';
 import { useGenerateStore } from '@/stores/useGenerateStore';
 import { useModelStore } from '@/stores/useModelStore';
 
+
 const GeneratePage = () => {
   const { prompt, setPrompt, loading, result, error, generate } = useGenerateStore();
   // ✅ Fixed: selectedModel + fetchModels come from useModelStore
