@@ -1,0 +1,17 @@
+# render.yaml — place this in the ROOT of your repo (same level as docker-compose.yml)
+services:
+  - type: web
+    name: hybridgen-backend
+    runtime: docker
+    dockerfilePath: ./docker/Dockerfile.backend
+    dockerContext: ./backend
+    plan: free
+    envVars:
+      - key: PYTHONPATH
+        value: /app
+      - key: ENVIRONMENT
+        value: production
+    disk:
+      name: checkpoints
+      mountPath: /app/checkpoints
+      sizeGB: 1

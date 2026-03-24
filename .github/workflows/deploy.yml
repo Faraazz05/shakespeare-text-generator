@@ -1,12 +1,9 @@
-# .github/workflows/deploy.yml
-# Auto-deploys the React frontend to GitHub Pages on every push to main
-
 name: Deploy to GitHub Pages
 
 on:
   push:
     branches: [main]
-  workflow_dispatch:   # allows manual trigger from GitHub Actions tab
+  workflow_dispatch:
 
 permissions:
   contents: read
@@ -21,17 +18,15 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
-      - name: Setup Node
-        uses: actions/setup-node@v4
+      - uses: actions/setup-node@v4
         with:
           node-version: 20
           cache: "npm"
           cache-dependency-path: frontend/package-lock.json
 
-      - name: Install dependencies
+      - name: Install
         working-directory: frontend
         run: npm ci
 
@@ -39,11 +34,9 @@ jobs:
         working-directory: frontend
         run: npm run build
         env:
-          # Backend is not available on GitHub Pages — UI shows offline state
-          VITE_API_BASE_URL: ""
+          VITE_API_BASE_URL: "https://shakespeare-text-generator-cqsl.onrender.com"
 
-      - name: Upload Pages artifact
-        uses: actions/upload-pages-artifact@v3
+      - uses: actions/upload-pages-artifact@v3
         with:
           path: frontend/dist
 
@@ -54,6 +47,6 @@ jobs:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
-      - name: Deploy to GitHub Pages
+      - name: Deploy
         id: deployment
         uses: actions/deploy-pages@v4

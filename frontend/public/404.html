@@ -4,12 +4,10 @@
     <meta charset="utf-8">
     <title>HybridGen</title>
     <script>
-      // GitHub Pages 404 → SPA redirect trick
-      // Saves the path and redirects to index.html which picks it up
+      var repo = '/shakespeare-text-generator';
       var path = window.location.pathname;
-      var repo = '/hybrid-text-gen';
       if (path.startsWith(repo)) {
-        sessionStorage.setItem('ghpages_redirect', path);
+        sessionStorage.setItem('ghpages_redirect', path.slice(repo.length) || '/');
         window.location.replace(repo + '/');
       }
     </script>

@@ -10,17 +10,19 @@ import ModelsPage from "@/pages/ModelsPage";
 import TrainPage from "@/pages/TrainPage";
 import ConfigPage from "@/pages/ConfigPage";
 import NotFound from "@/pages/NotFound";
-import LandingPage from "./pages/LandingPage";
+
+// ✅ Matches your actual GitHub repo name
+const BASE = import.meta.env.MODE === "production"
+  ? "/shakespeare-text-generator"
+  : "";
 
 function App() {
   return (
-    // ✅ TooltipProvider wraps everything — fixes "Tooltip must be used within TooltipProvider"
     <TooltipProvider>
-      <BrowserRouter>
+      <BrowserRouter basename={BASE}>
         <Navbar />
         <Routes>
-          <Route path="/"         element={<LandingPage />} />
-          <Route path="/index"    element={<Index />} />
+          <Route path="/"         element={<Index />} />
           <Route path="/generate" element={<GeneratePage />} />
           <Route path="/explain"  element={<ExplainPage />} />
           <Route path="/models"   element={<ModelsPage />} />
