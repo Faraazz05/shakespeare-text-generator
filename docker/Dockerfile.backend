@@ -22,7 +22,7 @@ COPY . .
 # Create required directories
 RUN mkdir -p /app/checkpoints /app/data /app/logs
 
-COPY download_checkpoints.sh /app/download_checkpoints.sh
+COPY backend/download_checkpoints.sh /app/download_checkpoints.sh
 RUN chmod +x /app/download_checkpoints.sh
 
 EXPOSE 8000
