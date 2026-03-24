@@ -34,7 +34,7 @@ jobs:
         working-directory: frontend
         run: npm run build
         env:
-          VITE_API_BASE_URL: "https://shakespeare-text-generator-cqsl.onrender.com"
+          VITE_API_BASE_URL: "https://shakespeare-text-generator-1.onrender.com"
 
       - uses: actions/upload-pages-artifact@v3
         with:
